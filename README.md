@@ -24,7 +24,7 @@ This repository contains an interactive Wordle helper written in Python. The sol
 1. **Prepare the Word List:**
 
    Make sure you have a `wordlist.txt` file in the repository’s root directory. Each line should contain a single 5-letter word.
-   ```
+   
 
 2. **Follow the On-Screen Prompts:**
 
