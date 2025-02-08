@@ -20,12 +20,14 @@ def get_feedback(guess, answer):
             answer_chars[answer_chars.index(guess[i])] = None  # Mark that occurrence as used.
     return "".join(feedback)
 
+
 def filter_candidates(candidates, guess, feedback):
     """
     Filters the candidate set to only those words that would yield the same
     feedback if 'guess' were applied.
     """
     return {word for word in candidates if get_feedback(guess, word) == feedback}
+
 
 def score_guess_naively(guess, candidates):
     """
@@ -37,38 +39,63 @@ def score_guess_naively(guess, candidates):
         partition[fb] = partition.get(fb, 0) + 1
     return max(partition.values()) if partition else 0
 
+
 def best_next_guess(candidates, words):
     """
-    For each possible guess (from the full word list), compute the worst-case candidate count
-    if that guess is made. Return the word that minimizes this value.
+    For each possible guess, compute the worst-case candidate count if that guess is made.
+    If the candidate set is small (<= 3 words), restrict the possible guesses to the candidate set.
     """
+    if len(candidates) <= 3:
+        search_set = candidates
+    else:
+        search_set = words
+
     best_score = float('inf')
     best_word = None
-    for word in words:
+    for word in search_set:
         score = score_guess_naively(word, candidates)
         if score < best_score:
             best_score = score
             best_word = word
     return best_word, best_score
 
+
 def interactive_solver(words):
     """
     Runs an interactive Wordle helper:
-      - You enter a starting word.
+      - You enter a starting word (validated against the word list).
       - Then, after trying it on Wordle, you enter the feedback (e.g. "ggyby").
       - The script filters the candidate list and suggests the next guess.
     """
     # Start with all words as possible answers.
     candidates = set(words)
-    starting_word = input("Enter a 5-letter starting word: ").strip().lower()
+
+    # Loop until a valid starting word (present in the list) is entered.
+    while True:
+        starting_word = input("Enter a 5-letter starting word: ").strip().lower()
+        if starting_word not in words:
+            print("Error: Starting word is not in the word list. Please try again.")
+        else:
+            break
+
     current_guess = starting_word
     attempt = 1
 
     while True:
         print(f"\nAttempt {attempt}: Try the word '{current_guess}'")
-        feedback = input("Enter feedback g(reen), y(ellow), b(lack), e.g. ggyby: ").strip().lower()
+        # Loop until valid feedback is entered.
+        while True:
+            feedback = input("Enter feedback g(reen), y(ellow), b(lack), e.g. ggyby: ").strip().lower()
+            if len(feedback) != 5:
+                print("Error: Feedback must be exactly 5 characters long. Please try again.")
+                continue
+            if any(ch not in "gyb" for ch in feedback):
+                print("Error: Feedback must only contain the letters 'g', 'y', or 'b'. Please try again.")
+                continue
+            break
+
         if feedback == "ggggg":
-            print("Congratulations! The wordl has been solved.")
+            print("Congratulations! The word has been solved.")
             break
 
         # Filter candidate words based on the feedback.
@@ -88,6 +115,7 @@ def interactive_solver(words):
             current_guess, worst_case = best_next_guess(candidates, words)
             print(f"Suggested next guess: '{current_guess}' (worst-case partition size: {worst_case})")
         attempt += 1
+
 
 if __name__ == '__main__':
     # Load the word list (assuming one 5-letter word per line).
