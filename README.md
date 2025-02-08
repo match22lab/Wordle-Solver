@@ -58,6 +58,10 @@ This repository contains an interactive Wordle helper written in Python. The sol
    - The solver will display the remaining number of candidate words and suggest your next guess.
 
    - The process repeats until you solve the puzzle (when you input `ggggg`).
+  
+   - ![Wordle Solver Screenshot](wordle1.jpg)
+   - ![Wordle Solver Screenshot](wordle2.jpf)
+
 
 ## Code Overview
 
