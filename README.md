@@ -60,7 +60,7 @@ This repository contains an interactive Wordle helper written in Python. The sol
    - The process repeats until you solve the puzzle (when you input `ggggg`).
   
    - ![Wordle Solver Screenshot](wordle1.jpg)
-   - ![Wordle Solver Screenshot](wordle2.jpf)
+   - ![Wordle Solver Screenshot](wordle2.jpg)
 
 
 ## Code Overview
