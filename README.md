@@ -21,24 +21,12 @@ This repository contains an interactive Wordle helper written in Python. The sol
 
 ## Usage
 
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/yourusername/wordle-solver.git
-   cd wordle-solver
-   ```
-
-2. **Prepare the Word List:**
+1. **Prepare the Word List:**
 
    Make sure you have a `wordlist.txt` file in the repository’s root directory. Each line should contain a single 5-letter word.
-
-3. **Run the Solver:**
-
-   ```bash
-   python interactive_solver.py
    ```
 
-4. **Follow the On-Screen Prompts:**
+2. **Follow the On-Screen Prompts:**
 
    - **Enter a starting word:**  
      The solver will prompt you to enter a 5-letter starting word.
