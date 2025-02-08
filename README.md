@@ -59,9 +59,6 @@ This repository contains an interactive Wordle helper written in Python. The sol
 
    - The process repeats until you solve the puzzle (when you input `ggggg`).
   
-   - ![Wordle Solver Screenshot](wordle1.jpg)
-   - ![Wordle Solver Screenshot](wordle2.jpg)
-
 
 ## Code Overview
 
@@ -87,21 +84,10 @@ Below is a summary of the main functions:
 
 ## Example Session
 
-```plaintext
-Loaded 5628 words from 'wordlist.txt'.
-Enter a 5-letter starting word: rates
 
-Attempt 1: Try the word 'rates'
-Enter feedback g(reen), y(ellow), b(lack), e.g. ggyby: bbgyb
-Remaining candidates: 509
-Suggested next guess: 'noele' (worst-case partition size: 39)
+   - ![Wordle Solver Screenshot](wordle1.jpg)
+   - ![Wordle Solver Screenshot](wordle2.jpg)
 
-Attempt 2: Try the word 'noele'
-Enter feedback g(reen), y(ellow), b(lack), e.g. ggyby: bbgyb
-Remaining candidates: 10
-Candidates: blech, bleib, buehl, fleck, fuehl, kleid, klemm, kuehl, pfeil, wiehl
-Suggested next guess: 'fibel' (worst-case partition size: 1)
-```
 
 ## License
 
