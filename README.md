@@ -12,7 +12,7 @@ This repository contains an interactive Wordle helper written in Python. The sol
 
 ## Files
 
-- **`interactive_solver.py`**: The main Python script.
+- **`main.py`**: The main Python script.
 - **`wordlist.txt`**: A text file containing a list of German 5-letter words (one word per line).
 
 ## Requirements
@@ -24,8 +24,8 @@ This repository contains an interactive Wordle helper written in Python. The sol
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/interactive-wordle-solver.git
-   cd interactive-wordle-solver
+   git clone https://github.com/yourusername/wordle-solver.git
+   cd wordle-solver
    ```
 
 2. **Prepare the Word List:**
