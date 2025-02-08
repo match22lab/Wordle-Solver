@@ -1,4 +1,4 @@
-# Interactive Wordle Solver
+# Wordle-Solver
 
 This repository contains an interactive Wordle helper written in Python. The solver assists you in finding the best guess by filtering a list of candidate words based on feedback from Wordle. It uses a simple, naive approach to score potential guesses by simulating the worst-case scenario for each guess. The attached list is a list of German words but can be replaced by any other file named wordlist.txt
 
