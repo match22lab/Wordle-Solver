@@ -40,12 +40,20 @@ def score_guess_naively(guess, candidates):
     return max(partition.values()) if partition else 0
 
 
-def best_next_guess(candidates, words):
+def best_next_guess(candidates, words, attempt):
     """
     For each possible guess, compute the worst-case candidate count if that guess is made.
-    If the candidate set is small (<= 3 words), restrict the possible guesses to the candidate set.
+
+    Normally, if there are 3 or fewer candidates, one might restrict the search to just those candidates.
+    However, if there are exactly 3 candidates, the current attempt is less than 6, and the best guess
+    from the candidate set yields a worst-case partition size of 2, then we try to find a guess outside the
+    candidate set that yields a worst-case partition size of 1.
     """
-    if len(candidates) <= 3:
+    # Normally, if candidates are small, restrict search to candidates.
+    # But if exactly 3 remain and we are early in the game, search among all words.
+    if len(candidates) == 3 and attempt < 6:
+        search_set = words
+    elif len(candidates) <= 3:
         search_set = candidates
     else:
         search_set = words
@@ -57,6 +65,18 @@ def best_next_guess(candidates, words):
         if score < best_score:
             best_score = score
             best_word = word
+
+    # If conditions are met, try to find a guess outside the candidate set that yields a better score.
+    if attempt < 6 and len(candidates) == 3 and best_score == 2 and best_word in candidates:
+        for word in words:
+            if word in candidates:
+                continue
+            score = score_guess_naively(word, candidates)
+            if score == 1:
+                best_word = word
+                best_score = 1
+                break
+
     return best_word, best_score
 
 
@@ -112,7 +132,7 @@ def interactive_solver(words):
             current_guess = next(iter(candidates))
             print(f"Only one candidate left: '{current_guess}'.")
         else:
-            current_guess, worst_case = best_next_guess(candidates, words)
+            current_guess, worst_case = best_next_guess(candidates, words, attempt)
             print(f"Suggested next guess: '{current_guess}' (worst-case partition size: {worst_case})")
         attempt += 1
 
